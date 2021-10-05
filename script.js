@@ -1,5 +1,18 @@
-let computerScore;
-let playerScore;
+const playerScoreCard = document.querySelector(".player-score span");
+const computerScoreCard = document.querySelector(".computer-score span");
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
+let playerScore = 0;
+let computerScore = 0;
+
+function playRound(playerSelection, computerSelection = computerPlay()) {
+    console.log(`Computer chose: ${computerSelection}`);
+    console.log(`You chose: ${playerSelection}`);
+    findRoundWinner(playerSelection, computerSelection);
+}
 
 function computerPlay() {
     let computerSelection = Math.floor(Math.random() * 3);
@@ -16,55 +29,51 @@ function computerPlay() {
     }
 }
 
-function findWinner(playerSelection, computerSelection) {
+function findRoundWinner(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
-        return 2;
+        console.log("It's a tie!");
     } else if (playerSelection == "rock") {
         if (computerSelection == "scissors") {
-            return 1;
+            playerPoint();
         } else {
-            return 0;
+            computerPoint();
         }
     } else if (playerSelection == "paper") {
         if (computerSelection == "rock") {
-            return 1;
+            playerPoint();
         } else {
-            return 0;
+            computerPoint();
         }
     } else if (playerSelection == "scissors") {
         if (computerSelection == "paper") {
-            return 1;
+            playerPoint();
         } else {
-            return 0;
+            computerPoint();
         }
     }
 }
 
-function playRound(playerSelection, computerSelection = computerPlay()) {
-    // let playerSelection;
-    // while (
-    //     playerSelection != "rock" &&
-    //     playerSelection != "paper" &&
-    //     playerSelection != "scissors"
-    // ) {
-    //     playerSelection = prompt("Rock, Paper, or Scissors?").toLowerCase();
-    // }
-    console.log(`Computer chose: ${computerSelection}`);
-    console.log(`You chose: ${playerSelection}`);
-    switch (findWinner(playerSelection, computerSelection)) {
-        case 2:
-            console.log("It's a tie!");
-            break;
-        case 1:
-            console.log("You win this round!");
-            playerScore++;
-            break;
-        case 0:
-            console.log("You lose this round!");
-            computerScore++;
-            break;
+function playerPoint() {
+    console.log("You win this round!");
+    playerScore++;
+    playerScoreCard.textContent = playerScore;
+    checkForGameOver();
+}
+
+function computerPoint() {
+    console.log("You lose this round!");
+    computerScore++;
+    computerScoreCard.textContent = computerScore;
+    checkForGameOver();
+}
+
+function checkForGameOver() {
+    if (playerScore == 5 || computerScore == 5) {
+        gameOver();
     }
 }
+
+function gameOver() {}
 
 function playRock() {
     playRound("rock");
@@ -77,25 +86,6 @@ function playPaper() {
 function playScissors() {
     playRound("scissors");
 }
-
-// function game() {
-//     computerScore = 0;
-//     playerScore = 0;
-//     while (computerScore < 3 && playerScore < 3) {
-//         playRound(computerPlay());
-//     }
-//     if (playerScore == 3) {
-//         console.log("You are the winner!");
-//     } else {
-//         console.log("You lose!");
-//     }
-// }
-
-// game();
-
-const rockButton = document.querySelector("#rock");
-const paperButton = document.querySelector("#paper");
-const scissorsButton = document.querySelector("#scissors");
 
 rockButton.addEventListener("click", playRock);
 paperButton.addEventListener("click", playPaper);
