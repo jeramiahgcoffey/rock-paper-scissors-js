@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+div {
+    margin: 40px;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+button {
+    margin: 30px;
+}

@@ -72,10 +72,10 @@ function computerPoint(playerSelection, computerSelection) {
 function checkForGameOver() {
     if (playerScore == 5) {
         messageBoard.textContent = "You Win! Make a choice to play again";
-        setTimeout(resetScoreBoard, 2000);
+        resetScoreBoard();
     } else if (computerScore == 5) {
         messageBoard.textContent = "You Lose! Make a choice to play again";
-        setTimeout(resetScoreBoard, 2000);
+        resetScoreBoard();
     }
 }
 
