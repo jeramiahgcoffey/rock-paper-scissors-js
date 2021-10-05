@@ -1,9 +1,12 @@
 body {
+    background-color: #cfb784;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
+    font-family: "Permanent Marker", Arial, Helvetica, sans-serif;
+    color: #a09f57;
 }
 
 div {
@@ -11,11 +14,27 @@ div {
 }
 
 .scoreboard {
+    border-radius: 10px;
+    background-color: #eadeb8;
     display: flex;
     justify-content: space-between;
     gap: 50px;
+    font-size: 64px;
+}
+
+.message-board {
+    min-width: 40%;
+    border-radius: 10px;
+    background-color: #eadeb8;
+    font-size: 32px;
 }
 
 button {
+    background-color: #eadeb8;
+    border-radius: 10px;
     margin: 30px;
+    padding: 20px;
+    font-family: "Permanent Marker", Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    text-align: center;
 }

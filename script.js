@@ -1,4 +1,4 @@
-const messageBoard = document.querySelector(".message-box");
+const messageBoard = document.querySelector(".message-board");
 
 const playerScoreCard = document.querySelector(".player-score span");
 const computerScoreCard = document.querySelector(".computer-score span");
