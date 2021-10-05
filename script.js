@@ -1,3 +1,5 @@
+const messageBoard = document.querySelector(".message-box");
+
 const playerScoreCard = document.querySelector(".player-score span");
 const computerScoreCard = document.querySelector(".computer-score span");
 
@@ -8,11 +10,11 @@ const scissorsButton = document.querySelector("#scissors");
 let playerScore = 0;
 let computerScore = 0;
 
-function playRound(playerSelection, computerSelection = computerPlay()) {
-    console.log(`Computer chose: ${computerSelection}`);
-    console.log(`You chose: ${playerSelection}`);
-    findRoundWinner(playerSelection, computerSelection);
-}
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+};
 
 function computerPlay() {
     let computerSelection = Math.floor(Math.random() * 3);
@@ -29,51 +31,60 @@ function computerPlay() {
     }
 }
 
-function findRoundWinner(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection = computerPlay()) {
     if (playerSelection == computerSelection) {
-        console.log("It's a tie!");
+        messageBoard.textContent = "It's a tie!";
     } else if (playerSelection == "rock") {
         if (computerSelection == "scissors") {
-            playerPoint();
+            playerPoint(playerSelection, computerSelection);
         } else {
-            computerPoint();
+            computerPoint(playerSelection, computerSelection);
         }
     } else if (playerSelection == "paper") {
         if (computerSelection == "rock") {
-            playerPoint();
+            playerPoint(playerSelection, computerSelection);
         } else {
-            computerPoint();
+            computerPoint(playerSelection, computerSelection);
         }
     } else if (playerSelection == "scissors") {
         if (computerSelection == "paper") {
-            playerPoint();
+            playerPoint(playerSelection, computerSelection);
         } else {
-            computerPoint();
+            computerPoint(playerSelection, computerSelection);
         }
     }
 }
 
-function playerPoint() {
-    console.log("You win this round!");
+function playerPoint(playerSelection, computerSelection) {
+    messageBoard.textContent = `You win! ${playerSelection.toProperCase()} beats ${computerSelection.toProperCase()}`;
     playerScore++;
     playerScoreCard.textContent = playerScore;
     checkForGameOver();
 }
 
-function computerPoint() {
-    console.log("You lose this round!");
+function computerPoint(playerSelection, computerSelection) {
+    messageBoard.textContent = `${computerSelection.toProperCase()} beats ${playerSelection.toProperCase()}, you lose!`;
     computerScore++;
     computerScoreCard.textContent = computerScore;
     checkForGameOver();
 }
 
 function checkForGameOver() {
-    if (playerScore == 5 || computerScore == 5) {
-        gameOver();
+    if (playerScore == 5) {
+        messageBoard.textContent = "You Win! Make a choice to play again";
+        setTimeout(resetScoreBoard, 2000);
+    } else if (computerScore == 5) {
+        messageBoard.textContent = "You Lose! Make a choice to play again";
+        setTimeout(resetScoreBoard, 2000);
     }
 }
 
-function gameOver() {}
+function resetScoreBoard() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreCard.textContent = playerScore;
+    computerScoreCard.textContent = computerScore;
+}
 
 function playRock() {
     playRound("rock");
